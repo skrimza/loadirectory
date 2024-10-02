@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Справочник погрузчиков</title>
+        <link rel="stylesheet" href="../static/style.css">
+    </head>
+    <body>
+        <header class="header">
+            <button class="profile">Профиль</button>
+        </header>
+        <section class="work-area">
+            <nav class="nav-panel">
+                <ul class="nav-panel_list">
+                    <li class="nav-panel_item">
+                        <button class="nav-panel_btn">
+                            Пользователи
+                        </button>
+                    </li>
+                    <li class="nav-panel_item">
+                        <button class="nav-panel_btn">
+                            Уведомления и напоминания
+                        </button>
+                    </li>
+                    <li class="nav-panel_item">
+                        <button class="nav-panel_btn">
+                            Настройки ФИС ОГПА
+                        </button>
+                    </li>
+                    <li class="nav-panel_item">
+                        <button class="nav-panel_btn">
+                            Справочник погрузчиков
+                        </button>
+                    </li>
+                    <li class="nav-panel_item">
+                        <button class="nav-panel_btn">
+                            Резервное копирование и восстановление
+                        </button>
+                    </li>
+                    <li class="nav-panel_item">
+                        <button class="nav-panel_btn">
+                            Справочники
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+            <div class="work-panel">
+                <h1 class="work-panel_title">
+                    Справочник погрузчиков
+                </h1>
+                <form action="/" class="work-panel_search">
+                    Номер погрузчика
+                    <input type="search" name="search-auto" id="form-search_string">
+                    <button class="form-search_btn">Искать</button>
+                    <button class="form-search_reset-btn">Сбросить фильтр</button>
+                </form>
+                <button class="work-panel_add-btn">
+                    Добавить
+                </button>
+                <div class="work-panel_block">
+                    <div class="work-panel_list">
+                        <table>
+                            <tr>
+                                <th>Код Записи</th>
+                                <th>Марка</th>
+                                <th>Номер</th>
+                                <th>Грузоподьемность</th>
+                                <th>Активен</th>
+                                <th>Время и Дата изменения</th>
+                                <th>Пользователь</th>
+                                <th>Дейтсвия</th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Амкодор</td>
+                                <td>номер машины</td>
+                                <td>Грузоподьем</td>
+                                <td>актив</td>
+                                <td>время</td>
+                                <td>Пользователь</td>
+                                <td>редактирование</td>
+                            </tr>                            
+                        </table>
+                    </div>
+                    <div class="work-panel_problem">
+                        <h2 class="work-panel_problem-title">
+                            Простои по погрузчику "номер погрузчика"
+                        </h2>
+                        <button class="work-panel_problem-add">
+                            Добавить
+                        </button>
+                        <div class="work-panel_problem_list">
+                            <table >
+                                <tr>
+                                    <th>Код записи</th>
+                                    <th>Начало</th>
+                                    <th>Окончание</th>
+                                    <th>Время простоя</th>
+                                    <th>Причина</th>
+                                    <th>Действия</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>время начала</td>
+                                    <td>время окончания</td>
+                                    <td>простой</td>
+                                    <td>причина</td>
+                                    <td>редактирование</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
