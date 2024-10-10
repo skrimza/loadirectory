@@ -1,0 +1,24 @@
+<div class="update-problem-block" id="update-problem-block-{{ problem[0] }}">
+    <form action="/update_problem" method="post" class="update-problem_form" id="update-problem_form-{{ problem[0] }}">
+        <p class="update-problem_text">
+            Добавить проблему
+        </p>
+        <hr/>
+        <div class="update-problem_times">
+            <input type="datetime-local" value="time-now" id="update-problem_first-time-{{ problem[0] }}">
+            <input type="datetime-local" value="time-now" id="update-problem_second-time-{{ problem[0] }}">
+        </div>
+        <select name="cars" id="update-problem_car-number-{{ problem[0] }}">
+            {% for car in context.all_cars %}
+                <option value="{{ car[0] }}">{{ car[2] }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" class="update-problem_title" id="update-problem_title-{{ problem[0] }}" placeholder="{{ problem[1] }}">
+        Инцидент
+        <textarea type="text" class="update-problem_description" id="update-problem_description-{{ problem[0] }}">{{ problem[2] | trim }}</textarea>
+        <div class="update-problem_buttons">
+            <button type="submit" id="save_problem_button">Сохранить</button>
+            <button type="button" id="cancel_problem_button">Отмена</button>
+        </div>
+    </form>
+</div>

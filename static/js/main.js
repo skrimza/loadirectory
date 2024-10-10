@@ -283,25 +283,25 @@ $(document).on('click', 'button.problem-delete', function (e) {
 });
 
 
-$(document).on('click', 'button.edit', function (e) {
+$(document).on('click', '#edit-car_problem', function () {
+    var carId = $(this).data('id');
     var timeNow = new Date();
     var datetime = timeNow.getFullYear() + "-"
         + ("0" + (timeNow.getMonth() + 1)).slice(-2) + "-"
         + ("0" + timeNow.getDate()).slice(-2) + "T"
         + ("0" + timeNow.getHours()).slice(-2) + ":"
         + ("0" + timeNow.getMinutes()).slice(-2);
-    $('#edit-car_window-reg_time').val(datetime);
-    $('#update-car_window-reg_time').val(datetime);
-    var carId = $(this).data('id');
+    $('#edit-car_window-reg_time-' + carId).val(datetime);
+    $('#update-car_window-reg_time-' + carId).val(datetime);
     $('#edit-car_window-' + carId).addClass("active");
-    $('#edit-car_window_form' + carId).on('submit', function (e) {
+    $('#edit-car_window_form-' + carId).on('submit', function (e) {
         e.preventDefault();
         $.ajax({
             data: {
                 car_id: carId,
-                description: $("#edit-car_window_description").val(),
-                date_start: $("#edit-car_window-reg_time").val(),
-                date_finish: $("#update-car_window-reg_time").val(),
+                description: $("#edit-car_window_description-" + carId).val(),
+                date_start: $("#edit-car_window-reg_time-" + carId).val(),
+                date_finish: $("#update-car_window-reg_time-" + carId).val(),
             },
             type: 'POST',
             url: '/update_car_information',
@@ -309,7 +309,7 @@ $(document).on('click', 'button.edit', function (e) {
                 if (data) {
                     $('.output').addClass("active")
                     $('.output').text('Проблема успешно добавлена').show();
-                    $('#edit-car_window_form')[0].reset();
+                    $('#edit-car_window_form-' + carId)[0].reset();
                     $.ajax({
                         url: '/get_updated_cars',
                         type: 'GET',
@@ -336,9 +336,67 @@ $(document).on('click', 'button.edit', function (e) {
             }
         });
     });
-    $('#cancel_edit-car-window_button').on('click', function () {
-        $('#edit-car_window_form')[0].reset();
+    $(document).on('click', '#cancel_edit-car-window_button', function () {
         $('#edit-car_window-' + carId).removeClass("active");
     });
 });
 
+$(document).on('click', '#update-problem_button', function () {
+    var problemId = $(this).data('id');
+    var timeNow = new Date();
+    var datetime = timeNow.getFullYear() + "-"
+        + ("0" + (timeNow.getMonth() + 1)).slice(-2) + "-"
+        + ("0" + timeNow.getDate()).slice(-2) + "T"
+        + ("0" + timeNow.getHours()).slice(-2) + ":"
+        + ("0" + timeNow.getMinutes()).slice(-2);
+    $('#update-problem_first-time-' + problemId).val(datetime);
+    $('#update-problem_second-time-' + problemId).val(datetime);
+    $('#update-problem-block-' + problemId).addClass("active");
+    $('#update-problem_form-' + problemId).on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            data: {
+                problem_id: problemId,
+                title: $("#update-problem_title-" + problemId).val(),
+                car_id: $("#update-problem_car-number-" + problemId).val(),
+                description: $("#update-problem_description-" + problemId).val(),
+                date_start: $("#update-problem_first-time-" + problemId).val(),
+                date_finish: $("#update-problem_second-time-" + problemId).val(),
+            },
+            type: 'POST',
+            url: '/update_problem_information',
+            success: function (data) {
+                if (data) {
+                    $('.output').addClass("active")
+                    $('.output').text('Проблема успешно обновлена').show();
+                    $('#update-problem_form-' + problemId)[0].reset();
+                    $.ajax({
+                        url: '/get_updated_cars',
+                        type: 'GET',
+                        success: function (response) {
+                            $('.work-panel_block').html(response);
+                            updateActiveIcons();
+                        }
+                    });
+                    setTimeout(function () {
+                        $('.output').removeClass('active');
+                        $('#update-problem_form-' + problemId).removeClass("active");
+                    }, 3000);
+                } else {
+                    $('.output').addClass("active");
+                    $('.output').text('Проблемы с сохранением, попробуйте позже').show();
+                    $('#update-problem_form-' + problemId)[0].reset();
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $('.output').text('An error occurred: ' + textStatus).show();
+                setTimeout(function () {
+                    $('.output').removeClass('active').hide();
+                }, 3000);
+            }
+        });
+    });
+    $(document).on('click', '#cancel_problem_button', function () {
+        $('#update-problem-block-' + problemId).removeClass("active");
+    });
+});

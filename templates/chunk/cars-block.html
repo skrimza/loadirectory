@@ -46,25 +46,11 @@
                         <td id="date_publish">{{ car[5] }}</td>
                         <td id="user">{{ car[6] }} {{ car[7]}}</td>
                         <td>
-                            <button class="edit" data-id="{{ car[0] }}">
+                            <button class="edit" id="edit-car_problem" data-id="{{ car[0] }}">
                             </button>
                             <button class="delete" data-id="{{ car[0] }}">
                             </button>
-                            <div class="edit-car_window" id="edit-car_window-{{ car[0] }}">
-                                <form action="" id="edit-car_window_form-{{ car[0] }}">
-                                    <p class="edit-car_window_text">Проблема с погрузчиком {{ car[2] }}? Опишите</p>
-                                    <hr/>
-                                    <div class="edit-car_window_times">
-                                        <input type="datetime-local" value="time-now" id="edit-car_window-reg_time">
-                                        <input type="datetime-local" value="time-now" id="update-car_window-reg_time">
-                                    </div>
-                                    <textarea type="text" name="textarea" id="edit-car_window_description">{% for problem in context.all_problems %}{% if car[2] in problem %}{{ problem[2] | trim }}{% endif %}{% endfor %}</textarea>
-                                    <div class="edit-car_window_buttons">
-                                        <button type="submit" id="save_edit-car-window_button">Сохранить</button>
-                                        <button type="button" id="cancel_edit-car-window_button">Отмена</button>
-                                    </div>
-                                </form>
-                            </div>
+                            {% include "chunk/update-car-problem.html" %}
                         </td>
                     </tr>
                 {% endfor %}                            
@@ -96,10 +82,11 @@
                             <td>{{ problem[4] - problem[3] }}</td>
                             <td>{{ problem[1] }}</td>
                             <td>
-                                <button class="problem-edit" data-id="{{ problem[0] }}">
+                                <button class="problem-edit" id="update-problem_button" data-id="{{ problem[0] }}">
                                 </button>
                                 <button class="problem-delete" data-id="{{ problem[0] }}">
                                 </button>
+                                {% include "chunk/update-problem.html" %}
                             </td>
                         </tr>
                     {% endfor %}

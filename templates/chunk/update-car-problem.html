@@ -1,0 +1,15 @@
+<div class="edit-car_window" id="edit-car_window-{{ car[0] }}">
+    <form action="/update_car_information" method="post" id="edit-car_window_form-{{ car[0] }}">
+        <p class="edit-car_window_text">Проблема с погрузчиком {{ car[2] }}? Опишите</p>
+        <hr/>
+        <div class="edit-car_window_times">
+            <input type="datetime-local" value="time-now" class="edit-car_window-reg_time" id="edit-car_window-reg_time-{{ car[0] }}">
+            <input type="datetime-local" value="time-now" class="update-car_window-reg_time" id="update-car_window-reg_time-{{ car[0] }}">
+        </div>
+        <textarea type="text" name="textarea" class="edit-car_window_description" id="edit-car_window_description-{{ car[0] }}">{% for problem in context.all_problems %}{% if car[2] in problem %}{{ problem[2] | trim }}{% endif %}{% endfor %}</textarea>
+        <div class="edit-car_window_buttons">
+            <button type="submit" id="save_edit-car-window_button">Сохранить</button>
+            <button type="button" id="cancel_edit-car-window_button">Отмена</button>
+        </div>
+    </form>
+</div>

@@ -2,7 +2,7 @@ from traceback import print_exc
 
 from pydantic import BaseModel, EmailStr, SecretStr, Field
 from pydantic_core import ValidationError
-from data import Profile
+from utils.user import Profile
 
 
 class DataValidate(BaseModel):
