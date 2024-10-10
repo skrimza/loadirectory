@@ -1,0 +1,82 @@
+<header class="header">
+    <button class="profile">Профиль</button>
+</header>
+<section class="work-area">
+    <nav class="nav-panel">
+        <ul class="nav-panel_list">
+            <li class="nav-panel_item">
+                <button class="nav-panel_btn">
+                    Пользователи
+                </button>
+            </li>
+            <li class="nav-panel_item">
+                <button class="nav-panel_btn">
+                    Уведомления и напоминания
+                </button>
+            </li>
+            <li class="nav-panel_item">
+                <button class="nav-panel_btn">
+                    Настройки ФИС ОГПА
+                </button>
+            </li>
+            <li class="nav-panel_item">
+                <button class="nav-panel_btn">
+                    Справочник погрузчиков
+                </button>
+            </li>
+            <li class="nav-panel_item">
+                <button class="nav-panel_btn">
+                    Резервное копирование и восстановление
+                </button>
+            </li>
+            <li class="nav-panel_item">
+                <button class="nav-panel_btn">
+                    Справочники
+                </button>
+            </li>
+        </ul>
+    </nav>
+    <div class="work-panel">
+        <h1 class="work-panel_title">
+            Справочник погрузчиков
+        </h1>
+        <form action="/" class="work-panel_search">
+            Номер погрузчика
+            <input type="search" name="search-auto" id="form-search_string">
+            <button class="form-search_btn">Искать</button>
+            <button class="form-search_reset-btn">Сбросить фильтр</button>
+        </form>
+        <div class="work-panel_add-cars">
+            <p class="work-panel_add-cars_title">
+                Добавить погрузчик
+            </p>
+            <hr/>
+            <form action="" id="register_new-car">
+                <input type="text" id="register_new-car__name" placeholder="Название автомобиля">
+                <input type="text" id="register_new-car__number" placeholder="Номер автомобиля">
+                <input type="text" id="register_new-car__weight" placeholder="Грузоподьемность автомобиля">
+                <select name="users" id="register">
+                    {% for user in context.all_users %}
+                        <option value="{{ user[0] }}">{{ user[1] }} {{ user[2] }}</option>
+                    {% endfor %}
+                </select>
+                <input type="datetime-local" value="time-now" id="register_new-car__time">
+                <div class="register_new-car_buttons">
+                    <button type="submit" id="save_new-car_button">Сохранить</button>
+                    <button type="button" id="cancel_new-car_button">Отмена</button>
+                </div>
+            </form>
+        </div>
+        <button class="work-panel_add-btn" type="button">
+            Добавить
+        </button>
+        {% include 'chunk/cars-block.html'%}
+    </div>
+</section>
+<div class="output"></div>
+<div class="output-agree">
+    Вы Уверены?
+    <p class="output-agree_problems"></p>
+    <button class="output-agree_yes">Да</button>
+    <button class="output-agree_no">Нет</button>
+</div>

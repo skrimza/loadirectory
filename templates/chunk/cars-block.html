@@ -1,0 +1,109 @@
+
+    <div class="work-panel_add-problems-block">
+        <p class="work-panel_add-problems_title">
+            Добавить проблему с погрузчиком
+        </p>
+        <hr/>
+        <form action="" id="register_new-problem">
+            <div class="register_new-problem_times">
+                <input type="datetime-local" value="time-now" id="register_new-problem_time">
+                <input type="datetime-local" value="time-now" id="update_new-problem_time">
+            </div>
+            <select name="cars" id="register_car-number">
+                {% for car in context.all_cars %}
+                    <option value="{{ car[0] }}">{{ car[2] }}</option>
+                {% endfor %}
+            </select>
+            <input type="text" id="register_new-problem_title" placeholder="Заголовок проблемы">
+            Описание инцидента
+            <textarea type="text" id="register_new-problem_description"></textarea>
+            <div class="register_new-problem_buttons">
+                <button type="submit" id="save_new-problem_button">Сохранить</button>
+                <button type="button" id="cancel_new-problem_button">Отмена</button>
+            </div>
+        </form>
+    </div>
+    <div class="work-panel_block">
+        <div class="work-panel_list">
+            <table>
+                <tr>
+                    <th>Код Записи</th>
+                    <th>Марка</th>
+                    <th>Номер</th>
+                    <th>Грузоподьемность</th>
+                    <th>Активен</th>
+                    <th>Время и Дата изменения</th>
+                    <th>Пользователь</th>
+                    <th>Дейтсвия</th>
+                </tr>
+                {% for car in context.all_cars %}
+                    <tr>
+                        <td id="car_id">{{ car[0] }}</td>
+                        <td id="car_name">{{ car[1] }}</td>
+                        <td id="car_number">{{ car[2] }}</td>
+                        <td id="load_capacity">{{ car[3] }}</td>
+                        <td id="active" data-value="{{ car[4] }}"></td>
+                        <td id="date_publish">{{ car[5] }}</td>
+                        <td id="user">{{ car[6] }} {{ car[7]}}</td>
+                        <td>
+                            <button class="edit" data-id="{{ car[0] }}">
+                            </button>
+                            <button class="delete" data-id="{{ car[0] }}">
+                            </button>
+                            <div class="edit-car_window" id="edit-car_window-{{ car[0] }}">
+                                <form action="" id="edit-car_window_form-{{ car[0] }}">
+                                    <p class="edit-car_window_text">Проблема с погрузчиком {{ car[2] }}? Опишите</p>
+                                    <hr/>
+                                    <div class="edit-car_window_times">
+                                        <input type="datetime-local" value="time-now" id="edit-car_window-reg_time">
+                                        <input type="datetime-local" value="time-now" id="update-car_window-reg_time">
+                                    </div>
+                                    <textarea type="text" name="textarea" id="edit-car_window_description">{% for problem in context.all_problems %}{% if car[2] in problem %}{{ problem[2] | trim }}{% endif %}{% endfor %}</textarea>
+                                    <div class="edit-car_window_buttons">
+                                        <button type="submit" id="save_edit-car-window_button">Сохранить</button>
+                                        <button type="button" id="cancel_edit-car-window_button">Отмена</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}                            
+            </table>
+        </div>
+        <div class="work-panel_problem">
+            <h2 class="work-panel_problem-title">
+                Простои по погрузчику "номер погрузчика"
+            </h2>
+            <button class="work-panel_problem-add">
+                Добавить
+            </button>
+            <div class="work-panel_problem_list">
+                <table >
+                    <tr>
+                        <th>Код записи</th>
+                        <th>Начало</th>
+                        <th>Окончание</th>
+                        <th>Время простоя</th>
+                        <th>Причина</th>
+                        <th>Действия</th>
+                    </tr>
+                    {% for problem in context.all_problems %}
+                    
+                        <tr>
+                            <td>{{ problem[0] }}</td>
+                            <td>{{ problem[3] }}</td>
+                            <td>{{ problem[4] }}</td>
+                            <td>{{ problem[4] - problem[3] }}</td>
+                            <td>{{ problem[1] }}</td>
+                            <td>
+                                <button class="problem-edit" data-id="{{ problem[0] }}">
+                                </button>
+                                <button class="problem-delete" data-id="{{ problem[0] }}">
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
