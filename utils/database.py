@@ -1,8 +1,13 @@
 from psycopg2 import connect
 from psycopg2.errors import Error
+from settings import settings
+from main import app
+
+
+app.config['DATABASE_URL'] = settings.DATABASE_URL.get_secret_value()
 
 class DataBaseRegister:
-    conn = connect()
+    conn = connect(app.config['DATABASE_URL'])
     
     @classmethod
     def create_tables(cls):
