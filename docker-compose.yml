@@ -14,9 +14,9 @@ services:
     command: "gunicorn -w ${WORKER} -b ${HOST} 'main:main' --log-level DEBUG"
     restart: always
     volumes:
-      - "./app.py:/app/app.py:ro"
+      - "./main.py:/app/main.py:ro"
       - "./settings.py:/app/settings.py:ro"
-      - "./handlers:/app/templates:ro"
+      - "./handlers:/app/handlers:ro"
       - "./sessions:/app/sessions:ro"
       - "./static:/app/static:ro"
       - "./templates:/app/templates:ro"
