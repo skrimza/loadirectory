@@ -4,19 +4,20 @@ from flask import (render_template,
                    url_for,
                    redirect,
                    session)
-from main import app
 from utils.database import DataBaseRegister
 from utils.cars import Cars
 from utils.user import Profile
 from utils.problems import Problems
+from routes import all_bp
+from main import app
 
-
-@app.route('/')
+@all_bp.route('/')
 def homepage():
-    DataBaseRegister.create_tables()
+    database=DataBaseRegister(conn=connect(app.config['DATABASE_URL']))
+    database.create_tables()
     return render_template("index.html")
 
-@app.route('/catalog')
+@all_bp.route('/catalog')
 def catalog():
     Cars.update_active_car()
     context_all = {'all_users': Profile.get_all_users(), 
@@ -32,7 +33,7 @@ def catalog():
     return render_template("main.html", visits=session['visits'], context=context_all)
         
     
-@app.route('/get_updated_cars', methods=[HTTPMethod.GET])
+@all_bp.route('/get_updated_cars', methods=[HTTPMethod.GET])
 def get_updated_cars():
     request_data = request.form.to_dict()
     print(request_data.get('register'))

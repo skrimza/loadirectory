@@ -8,20 +8,13 @@ services:
     env_file:
       - ".env"
     ports:
-      - "8001:8000"
+      - "5001:5000"
     environment:
       - DB_URL=${DATABASE_URL}
-    command: "gunicorn -w ${WORKER} -b ${HOST} 'main:main' --log-level DEBUG"
+    command: "gunicorn -w ${WORKER} -b ${HOST}:${PORT} 'main:app' --log-level DEBUG"
     restart: always
     volumes:
-      - "./main.py:/app/main.py:ro"
-      - "./settings.py:/app/settings.py:ro"
-      - "./handlers:/app/handlers:ro"
-      - "./sessions:/app/sessions:ro"
-      - "./static:/app/static:ro"
-      - "./templates:/app/templates:ro"
-      - "./utils:/app/utils:ro"
-      - "./validators:/app/validators:ro"
+      - ".:/app:ro"
     depends_on:
       - db
   
@@ -33,5 +26,9 @@ services:
       - POSTGRES_DB=catalogy
       - POSTGRES_USER=skrim
       - POSTGRES_PASSWORD=skrimza
-    expose:
-      - 5432
+      - POSTGRES_HOST=0.0.0.0
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - "5433:5432"
+    restart: always

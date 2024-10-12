@@ -1,11 +1,12 @@
 from http import HTTPMethod
 from flask import request
 
-from main import app
 from utils.cars import Cars
 from utils.problems import Problems
+from routes import all_bp
 
-@app.route(rule='/register_car', methods=[HTTPMethod.POST])
+
+@all_bp.route(rule='/register_car', methods=[HTTPMethod.POST])
 def register_car():
     request_data = request.form.to_dict()
     new_car = Cars(car_name=request_data['car_name'],
@@ -15,7 +16,7 @@ def register_car():
                    user_id=request_data['user_id']).add_new_car()
     return new_car
 
-@app.route('/delete_car', methods=[HTTPMethod.POST])
+@all_bp.route('/delete_car', methods=[HTTPMethod.POST])
 def delete_car():
     request_data = request.form.to_dict()
     delete = Cars.delete_car(
@@ -23,7 +24,7 @@ def delete_car():
     )
     return delete
 
-@app.route('/update_car_information', methods=[HTTPMethod.POST])
+@all_bp.route('/update_car_information', methods=[HTTPMethod.POST])
 def update_car_information():
     request_data = request.form.to_dict()
     print(request_data)

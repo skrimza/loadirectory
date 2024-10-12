@@ -1,22 +1,22 @@
 from http import HTTPMethod
 from json import dumps
-from main import app
-from validators.validation import pyform
 from flask import (jsonify,
                    request,
                    session,
                    url_for)
+from validators.validation import pyform
 from utils.user import Profile
+from routes import all_bp
 
 
-@app.route(rule='/register', methods=[HTTPMethod.POST])
+@all_bp.route(rule='/register', methods=[HTTPMethod.POST])
 def register_user():
     register_form = pyform(register=request.form.to_dict())
     print(jsonify({'text': register_form}))
     return jsonify(dumps({'Content-Type': 'application/json', 'response': register_form}))
 
 
-@app.route(rule='/login', methods=[HTTPMethod.POST])
+@all_bp.route(rule='/login', methods=[HTTPMethod.POST])
 def login_user():
     request_data = request.form.to_dict()
     print(request_data)

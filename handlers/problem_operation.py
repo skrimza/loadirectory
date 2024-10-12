@@ -1,9 +1,10 @@
 from http import HTTPMethod
 from flask import request
-from main import app
 from utils.problems import Problems
+from routes import all_bp
 
-@app.route(rule='/register_problem', methods=[HTTPMethod.POST])
+
+@all_bp.route(rule='/register_problem', methods=[HTTPMethod.POST])
 def register_problem():
     request_data = request.form.to_dict()
     new_problem = Problems(title=request_data['title'], 
@@ -17,7 +18,7 @@ def register_problem():
         return 'True'
     
     
-@app.route('/delete_problem', methods=[HTTPMethod.POST])
+@all_bp.route('/delete_problem', methods=[HTTPMethod.POST])
 def delete_problem():
     request_data = request.form.to_dict()
     delete_problem_car = Problems.delete_problem(
@@ -25,7 +26,7 @@ def delete_problem():
     )
     return delete_problem_car
 
-@app.route('/update_problem_information', methods=[HTTPMethod.POST])
+@all_bp.route('/update_problem_information', methods=[HTTPMethod.POST])
 def update_problem_information():
     request_data = request.form.to_dict()
     print(request_data)
