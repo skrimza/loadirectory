@@ -1,8 +1,15 @@
-from flask import Flask, render_template
-from  utils.database import DataBaseRegister
-from settings import settings
+from flask import Flask
+from datetime import timedelta
+from sessions.session import generic_session_key
+from handlers import bp, base_bp
 
 app = Flask(__name__)
-app.config['DATABASE_URL'] = settings.DATABASE_URL.get_secret_value()
 
+app.secret_key = generic_session_key()
+app.permanent_session_lifetime = timedelta(days=1)
 
+app.register_blueprint(bp, url_prefix='/router')
+app.register_blueprint(base_bp, url_prefix='/base')
+
+app.static_folder = 'static'
+app.template_folder = 'templates'

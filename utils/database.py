@@ -1,8 +1,11 @@
 from psycopg2 import connect
 from psycopg2.errors import Error
+from settings import settings
+
+
 
 class DataBaseRegister:
-    conn = None
+    conn = connect(settings.DATABASE_URL.get_secret_value())
     
     @classmethod
     def create_tables(cls):

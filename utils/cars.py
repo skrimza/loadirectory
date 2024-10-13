@@ -1,4 +1,4 @@
-from database import DataBaseRegister
+from utils import DataBaseRegister
 
 class Cars(DataBaseRegister):
     

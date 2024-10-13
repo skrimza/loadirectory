@@ -1,4 +1,4 @@
-from database import DataBaseRegister
+from .database import DataBaseRegister
 
 from psycopg2.errors import UniqueViolation, InFailedSqlTransaction
 from werkzeug.security import generate_password_hash, check_password_hash
