@@ -1,10 +1,11 @@
 from json import dumps
-from flask import url_for, Blueprint, jsonify
-from flask import request, session, render_template
-from utils import DataBaseRegister, Profile
+from flask import url_for, jsonify
+from flask import request, session, render_template, redirect
+from utils import DataBaseRegister, Profile, Cars, Problems
 from validators import pyform
+from flask import Blueprint
 
-bp = Blueprint('route', __name__)
+bp = Blueprint('router', __name__)
 
 @bp.route('/', methods=['GET'])
 def homepage():
@@ -31,7 +32,22 @@ def login_user():
         session['name'] = login_form['name']
         return jsonify(dumps({'Content-Type': 'application/json', 
                               'response': login_form, 
-                              'redirect': url_for('catalog')
+                              'redirect': url_for('router.catalog')
                               }))
     else:
         return jsonify(dumps({'Content-Type': 'application/json', 'response': login_form}))
+
+@bp.route('/catalog', methods=['GET'])
+def catalog():
+    Cars.update_active_car()
+    context_all = {'all_users': Profile.get_all_users(), 
+                   'all_cars': Cars.get_all_cars(),
+                   'all_problems': Problems.get_all_problems()}
+    if not session.get('visits'):
+        return redirect(url_for('router.homepage'))
+    session.permanent = True
+    if 'visits' in session:
+        session['visits'] = session.get('visits') + 1
+    else:
+        session['visits'] = 1
+    return render_template("main.html", visits=session['visits'], context=context_all)

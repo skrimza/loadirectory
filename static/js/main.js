@@ -9,7 +9,7 @@ $('#register-form').on('submit', function (e) {
             password: $("#password").val()
         },
         type: 'POST',
-        url: '/route/register',
+        url: '/router/register',
         success: function (data) {
             var dataString = JSON.parse(data);
             if (dataString.response.error) {
@@ -45,7 +45,7 @@ $('#login-form').on('submit', function (e) {
             password: $("#login-password").val()
         },
         type: 'POST',
-        url: '/route/login',
+        url: '/router/login',
         success: function (data) {
             var dataString = JSON.parse(data);
             if (dataString.response.message) {
@@ -114,7 +114,7 @@ $(document).on('click', '.work-panel_add-btn', function (e) {
                     $('.output').text('Автомобиль успешно добавлен').show();
                     $('#register_new-car')[0].reset();
                     $.ajax({
-                        url: '/router/get_updated_cars',
+                        url: '/base/get_updated_cars',
                         data: {
                             register: 'car'
                         },
@@ -177,7 +177,7 @@ $(document).on('click', '.work-panel_problem-add', function (e) {
                     $('.output').text('Проблема успешно добавлена').show();
                     $('#register_new-problem')[0].reset();
                     $.ajax({
-                        url: '/router/get_updated_cars', 
+                        url: '/base/get_updated_cars', 
                         type: 'GET',
                         success: function (response) {
                             $('.work-panel_block').html(response);
@@ -224,7 +224,7 @@ $(document).on('click', 'button.delete', function (e) {
                 if (data) {
                     $('.output-agree').removeClass('active');
                     $.ajax({
-                        url: '/router/get_updated_cars',
+                        url: '/base/get_updated_cars',
                         type: 'GET',
                         success: function (response) {
                             $('.work-panel_block').html(response);
@@ -261,7 +261,7 @@ $(document).on('click', 'button.problem-delete', function (e) {
                 if (data) {
                     $('.output-agree').removeClass('active');
                     $.ajax({
-                        url: '/router/get_updated_cars',
+                        url: '/base/get_updated_cars',
                         type: 'GET',
                         success: function (response) {
                             $('.work-panel_block').html(response);
@@ -311,7 +311,7 @@ $(document).on('click', '#edit-car_problem', function () {
                     $('.output').text('Проблема успешно добавлена').show();
                     $('#edit-car_window_form-' + carId)[0].reset();
                     $.ajax({
-                        url: '/router/get_updated_cars',
+                        url: '/base/get_updated_cars',
                         type: 'GET',
                         success: function (response) {
                             $('.work-panel_block').html(response);
@@ -371,7 +371,7 @@ $(document).on('click', '#update-problem_button', function () {
                     $('.output').text('Проблема успешно обновлена').show();
                     $('#update-problem_form-' + problemId)[0].reset();
                     $.ajax({
-                        url: '/router/get_updated_cars',
+                        url: '/base/get_updated_cars',
                         type: 'GET',
                         success: function (response) {
                             $('.work-panel_block').html(response);

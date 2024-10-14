@@ -22,14 +22,14 @@ header {
 .work-area {
     display: grid;
     grid-template-columns: 225px 1fr;
-    gap: 20px;
+    gap: 10px;
     margin-top: 20px;
 }
 .nav-panel, .work-panel {
     background-color: #bcbcbc;
-    padding: 15px;
+    padding: 10px;
     border-radius: 10px;
-    height: 85vh;
+    height: 100vh;
 }
 .nav-panel_list {
     padding: 0;
@@ -47,7 +47,8 @@ header {
 }
 .work-panel_block {
     display: flex;
-    height: 600px;
+    justify-content: space-around;
+    height: 500px;
     overflow: hidden;
 }
 .work-panel_list {
@@ -65,12 +66,12 @@ table {
 }
 th, td {
     border: 1px solid #bcbcbc;
-    padding: 10px 5px;
+    padding: 10px 0;
     text-align: center;
 }
 tr:first-of-type th {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
 }
 .form-search_btn, .work-panel_add-btn, .work-panel_problem-add {
     background: #e60303;

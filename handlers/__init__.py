@@ -3,5 +3,5 @@ from .base import base_bp
 
 __all__ = [
     'bp',
-    'base_bp',
+    'base_bp'
 ]

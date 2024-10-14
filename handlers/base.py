@@ -1,28 +1,7 @@
-from flask import (request, 
-                   Blueprint, 
-                   session, 
-                   url_for, 
-                   render_template, 
-                   redirect)
+from flask import request, Blueprint, render_template
 from utils import Cars, Problems, Profile
 
-
 base_bp = Blueprint('catalog', __name__)
-
-@base_bp.route('/catalog', methods=['GET'])
-def catalog():
-    Cars.update_active_car()
-    context_all = {'all_users': Profile.get_all_users(), 
-                   'all_cars': Cars.get_all_cars(),
-                   'all_problems': Problems.get_all_problems()}
-    if not session.get('visits'):
-        return redirect(url_for('homepage'))
-    session.permanent = True
-    if 'visits' in session:
-        session['visits'] = session.get('visits') + 1
-    else:
-        session['visits'] = 1
-    return render_template("main.html", visits=session['visits'], context=context_all)
 
 @base_bp.route('/get_updated_cars', methods=['GET'])
 def get_updated_cars():
