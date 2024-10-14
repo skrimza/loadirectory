@@ -8,7 +8,7 @@ services:
     env_file:
       - ".env"
     ports:
-      - "5001:5000"
+      - "5002:5000"
     environment:
       - DB_URL=${DATABASE_URL}
     command: "gunicorn -w ${WORKER} -b ${HOST}:${PORT} 'main:app' --log-level DEBUG"
