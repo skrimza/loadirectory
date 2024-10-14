@@ -9,7 +9,7 @@ $('#register-form').on('submit', function (e) {
             password: $("#password").val()
         },
         type: 'POST',
-        url: '/base/register',
+        url: '/route/register',
         success: function (data) {
             var dataString = JSON.parse(data);
             if (dataString.response.error) {
@@ -45,7 +45,7 @@ $('#login-form').on('submit', function (e) {
             password: $("#login-password").val()
         },
         type: 'POST',
-        url: '/base/login',
+        url: '/route/login',
         success: function (data) {
             var dataString = JSON.parse(data);
             if (dataString.response.message) {
