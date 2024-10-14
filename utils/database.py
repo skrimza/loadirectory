@@ -5,7 +5,7 @@ from settings import settings
 
 
 class DataBaseRegister:
-    conn = connect(settings.DATABASE_URL.get_secret_value())
+    conn = connect(settings.DATABASE_URL)
     
     @classmethod
     def create_tables(cls):

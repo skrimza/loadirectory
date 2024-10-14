@@ -8,7 +8,7 @@ class Settings(BaseSettings):
         case_sensitive=False
     )
     HOST: str
-    DATABASE_URL: SecretStr
+    DATABASE_URL: str
     
     
 settings = Settings()
