@@ -11,6 +11,12 @@ header {
     justify-content: end;
     margin-bottom: 20px;
 }
+.nav-panel_btn {
+    transition: all 0.5s ease;
+}
+.nav-panel_btn:hover {
+    color: #e60303;
+}
 .profile {
     padding: 10px 30px;
     background: #FFFFFF;

@@ -51,3 +51,9 @@ def catalog():
     else:
         session['visits'] = 1
     return render_template("main.html", visits=session['visits'], context=context_all)
+
+
+@bp.route('/quit', methods=['POST'])
+def quit_app():
+    session.clear()
+    return redirect(url_for('router.homepage'))

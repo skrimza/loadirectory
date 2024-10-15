@@ -400,3 +400,18 @@ $(document).on('click', '#update-problem_button', function () {
         $('#update-problem-block-' + problemId).removeClass("active");
     });
 });
+
+$('#quit_user').on('click', function (e) {
+    e.preventDefault();
+    $.ajax({
+        url: '/router/quit',
+        type: 'POST',
+        success: function (response) {
+            window.location.href = '/router/';
+        },
+        error: function (xhr, status, error) {
+            console.error('Ошибка при выходе:', error);
+            alert('Произошла ошибка при выходе. Попробуйте снова.');
+        }
+    });
+});
