@@ -90,7 +90,7 @@ function updateActiveIcons() {
 updateActiveIcons();
 
 // add new car form
-$(document).on('click', '.work-panel_add-btn', function (e) {
+$(document).on('click', '#work-panel_add-btn', function (e) {
     $('.work-panel_add-cars').addClass("active")
     var timeNow = new Date();
     var datetime = timeNow.getFullYear() + "-"

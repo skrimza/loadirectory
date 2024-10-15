@@ -9,8 +9,8 @@ class DataBaseRegister:
     
     @classmethod
     def create_tables(cls):
-        try:
-            with cls.conn.cursor() as cur:
+        with cls.conn.cursor() as cur:
+            try:
                 cur.execute('''
                     CREATE TABLE if NOT EXISTS users(
                         id SERIAL PRIMARY KEY,
@@ -24,7 +24,7 @@ class DataBaseRegister:
                     CREATE TABLE IF NOT EXISTS cars(
                         id SERIAL PRIMARY KEY,
                         car_name VARCHAR(64) NOT NULL,
-                        car_number VARCHAR(10) NOT NULL UNIQUE,
+                        car_number VARCHAR(16) NOT NULL UNIQUE,
                         load_capacity DECIMAL(5, 3),
                         active BOOLEAN DEFAULT true,
                         date_publish TIMESTAMP DEFAULT now(),
@@ -43,7 +43,7 @@ class DataBaseRegister:
                         FOREIGN KEY (car_id) REFERENCES cars(id)
                     )
                 ''')
-        except Error:
-            cls.conn.rollback()
-        else:
-            cls.conn.commit()
+            except Error:
+                cls.conn.rollback()
+            else:
+                cls.conn.commit()
