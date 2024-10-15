@@ -25,3 +25,5 @@ services:
       - POSTGRES_USER=skrim
       - POSTGRES_PASSWORD=skrimza
     restart: always
+    ports:
+      - "5432"
