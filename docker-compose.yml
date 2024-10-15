@@ -26,4 +26,4 @@ services:
       - POSTGRES_PASSWORD=skrimza
     restart: always
     ports:
-      - "5432"
+      - "5432:5432"
