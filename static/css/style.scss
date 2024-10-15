@@ -47,8 +47,9 @@ header {
 }
 .work-panel_block {
     display: flex;
-    justify-content: space-around;
-    height: 500px;
+    justify-content: space-between;
+    max-height: 550px;
+    height: 100%;
     overflow: hidden;
 }
 .work-panel_list {
@@ -68,6 +69,8 @@ th, td {
     border: 1px solid #bcbcbc;
     padding: 10px 0;
     text-align: center;
+    word-wrap: break-word;
+    width: 120px;
 }
 tr:first-of-type th {
     font-weight: bold;

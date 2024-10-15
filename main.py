@@ -10,6 +10,6 @@ app.permanent_session_lifetime = timedelta(days=1)
 
 app.register_blueprint(bp, url_prefix='/router')
 app.register_blueprint(base_bp, url_prefix='/base')
-print(app.url_map)
+
 app.static_folder = 'static'
 app.template_folder = 'templates'

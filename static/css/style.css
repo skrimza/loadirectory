@@ -61,9 +61,11 @@ header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  height: 500px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-height: 550px;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -87,6 +89,8 @@ th, td {
   border: 1px solid #bcbcbc;
   padding: 10px 0;
   text-align: center;
+  word-wrap: break-word;
+  width: 120px;
 }
 
 tr:first-of-type th {
