@@ -59,7 +59,10 @@ $('#login-form').on('submit', function (e) {
             } else {
                 $('.output').addClass("active");
                 $('.output').text(dataString.response.error).show();
-                $('#login-form')[0].reset();
+                setTimeout(function () {
+                    $('.output').removeClass('active');
+                    $('#login-form')[0].reset();
+                }, 3000);
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
