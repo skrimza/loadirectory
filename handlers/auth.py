@@ -23,21 +23,23 @@ def register_user():
 def login_user():
     try:
         request_data = request.form.to_dict()
+        print(request_data)
         login_form = Profile(name=None, 
-                             lastname=None, 
-                             email=request_data['email'], 
-                             password=request_data['password']).login_user()
+                            lastname=None, 
+                            email=request_data['email'], 
+                            password=request_data['password']).login_user()
         if 'message' in login_form.keys():
             session['visits'] = 1
             session['name'] = login_form['name']
-            return jsonify({'response': login_form, 
-                            'redirect': url_for('router.catalog')})
-        else:
-            return jsonify({'response': login_form}), 400
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-    
-    
+            return jsonify(dumps({'Content-Type': 'application/json', 
+                                'response': login_form, 
+                                'redirect': url_for('router.catalog')
+                                }))
+    except Exception:
+        return jsonify(dumps({'Content-Type': 'application/json', 'response': 'Что-то пошло не так'}))
+    else:
+        return jsonify(dumps({'Content-Type': 'application/json', 'response': login_form}))  
+
 @bp.route('/catalog', methods=['GET'])
 def catalog():
     Cars.update_active_car()
