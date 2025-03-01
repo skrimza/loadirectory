@@ -6,7 +6,6 @@ base_bp = Blueprint('catalog', __name__)
 @base_bp.route('/get_updated_cars', methods=['GET'])
 def get_updated_cars():
     request_data = request.form.to_dict()
-    print(request_data.get('register'))
     if request_data.get('register'):
         context_all = {'all_users': Profile.get_all_users(), 
                    'all_cars': Cars.get_all_cars(),
